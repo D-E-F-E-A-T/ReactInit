@@ -32,13 +32,32 @@ var ShowInfo = createClass({
 });
 
 var Show = createClass({
+  getDefaultProps: function() {
+    return {
+      showIndex: 0
+    };
+  },
+  getInitialState: function() {
+    return {
+      showIndex: this.props.showIndex
+    };
+  },
+  handleButtonClick: function() {
+    var totalShows = this.props.shows.length;
+    this.setState(function(prevState){
+      return{
+        showIndex: (prevState.showIndex + 1) % totalShows
+      }
+    });
+  },
   render: function() {
-    var show = this.props.show;
+    var show = this.props.shows[this.state.showIndex];
     return (
       <div className="text-center">
         <Title showTitle={show.title}/>
         <Poster showPoster={show.poster}/>
         <ShowInfo showPlot={show.plot} showRating={show.imdbRating}/>
+        <button onClick={this.handleButtonClick}>Next</button>
       </div>
     );
   }
