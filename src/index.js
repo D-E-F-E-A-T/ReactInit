@@ -10,6 +10,9 @@ var Component = function(props) {
   );
 }
 ReactDOM.render(
-  <Component greeting="Hello World" color="green" />,
+  <div>
+    <Component greeting="Hello World" color="blue" />
+    <Component greeting="Hey there" color="green" />
+  </div>,
   document.getElementById('root')
 );
