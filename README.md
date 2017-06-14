@@ -1,1 +1,3 @@
-This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
+## A simple Single Page React Application to show movies
+## info(title, poster, IMDB rating).
+### URL: ShowApp(https://janebautina.github.io/ReactInit)
