@@ -1,27 +1,25 @@
 // All conponents are here
 var React = require('react');
-var ReactDOM = require('react-dom');
-var createClass = require('create-react-class');
 
-var Title = createClass({
-  render: function() {
+class Title extends React.Component{
+  render() {
     return (
       <h3>Title: {this.props.showTitle}</h3>
     );
   }
-});
+}
 
-var Poster = createClass({
-  render: function() {
+class Poster extends React.Component{
+  render() {
     return(
       <img src={this.props.showPoster}
       alt = "Show Poster" style={{width: 400, height: 400}}/>
     );
   }
-});
+}
 
-var ShowInfo = createClass({
-  render: function() {
+class ShowInfo extends React.Component{
+  render() {
     return(
       <div>
         <p>{this.props.showPlot}</p>
@@ -29,37 +27,40 @@ var ShowInfo = createClass({
       </div>
     );
   }
-});
+}
 
-var Show = createClass({
-  getDefaultProps: function() {
-    return {
-      showIndex: 0
-    };
-  },
-  getInitialState: function() {
-    return {
+class Show extends React.Component{
+  static defaultProps = {
+    showIndex: 0
+  }
+  
+  constructor(props) {
+    super(props);
+    this.state = {
       showIndex: this.props.showIndex
     };
-  },
-  handleButtonClick: function() {
+  }
+
+  handleButtonClick() {
     var totalShows = this.props.shows.length;
     this.setState(function(prevState){
       return{
         showIndex: (prevState.showIndex + 1) % totalShows
       }
     });
-  },
-  render: function() {
+  }
+
+  render() {
     var show = this.props.shows[this.state.showIndex];
     return (
       <div className="text-center">
         <Title showTitle={show.title}/>
         <Poster showPoster={show.poster}/>
         <ShowInfo showPlot={show.plot} showRating={show.imdbRating}/>
-        <button onClick={this.handleButtonClick}>Next</button>
+        <button onClick={this.handleButtonClick.bind(this)}>Next</button>
       </div>
     );
   }
-});
+}
+
 module.exports = Show; // import Show
